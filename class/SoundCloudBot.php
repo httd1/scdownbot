@@ -128,7 +128,7 @@ class SoundCloudBot {
             $user_permalink = $info ['user']['permalink_url'];
 
             $lancamento = date ('d/m/Y', strtotime ($info ['created_at']));
-            $artwork = str_replace ('large', 'crop', $info ['artwork_url']) ?? '';
+            $artwork = (isset ($info ['artwork_url'])) ? str_replace ('large', 'crop', $info ['artwork_url']) : '';
 
             $text = "🎧 <a href=\"$user_permalink\">{$username}</a> - <b>{$titulo}</b>\n\n";
             $text .= "😉 @SCDownbot\n📅 {$lancamento}";
