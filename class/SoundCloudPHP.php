@@ -5,20 +5,8 @@ class SoundCloudPHP {
 	const API_INFO = 'https://api-v2.soundcloud.com';
 	public $client_id;
 
-	function __construct (){
-
-		foreach ($this->_getScripts () as $script){
-
-			$result = $this->searchClientId ($script);
-
-			if (is_null ($result)){
-				continue;
-			}
-
-			$this->client_id = $result;
-		}
-
-	}
+	function __construct ()
+	{}
 
 	public function _getHome ()
 	{
@@ -50,6 +38,16 @@ class SoundCloudPHP {
 
 	public function getMusicInfo ($url)
 	{
+		foreach ($this->_getScripts () as $script){
+
+			$result = $this->searchClientId ($script);
+
+			if (is_null ($result)){
+				continue;
+			}
+
+			$this->client_id = $result;
+		}
 
 		$info = json_decode ($this->rquest (self::API_INFO."/resolve?url={$url}&client_id={$this->client_id}"), true);
 
